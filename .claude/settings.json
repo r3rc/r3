@@ -1,0 +1,36 @@
+{
+    "permissions": {
+        "deny": [
+            "Bash(rm -rf*)",
+            "Bash(git push --force*)"
+        ],
+        "allow": [
+            "Bash(ls*)",
+            "Bash(rg*)",
+            "Bash(wc*)",
+            "Bash(cat*)",
+            "Bash(find*)",
+            "Bash(grep*)",
+            "Bash(head*)",
+            "Bash(tail*)",
+            "Bash(mkdir*)",
+            "Bash(echo*)",
+            "Bash(git add*)",
+            "Bash(git commit*)",
+            "Bash(git status*)",
+            "Bash(git log*)",
+            "Bash(git diff*)",
+            "Bash(git stash*)",
+            "Bash(git restore*)",
+            "Bash(git branch*)",
+            "Bash(deno fmt*)",
+            "Bash(deno lint*)",
+            "Bash(deno check*)",
+            "Bash(deno test*)",
+            "Bash(deno task*)"
+        ]
+    },
+    "enabledPlugins": {
+        "deno-skills@denoland-skills": true
+    }
+}
