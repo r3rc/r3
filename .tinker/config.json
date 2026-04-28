@@ -1,6 +1,8 @@
 {
     "sources": {
+        "citty": "https://github.com/unjs/citty.git",
         "deno-std": "https://github.com/denoland/std",
+        "denokv": "https://github.com/denoland/denokv.git",
         "linux": "https://github.com/torvalds/linux"
     }
 }

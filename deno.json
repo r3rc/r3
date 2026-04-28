@@ -3,6 +3,7 @@
     "version": "0.1.0",
     "exports": {},
     "workspace": [
+        "./clip",
         "./jarvis",
         "./tinker"
     ],
@@ -16,12 +17,17 @@
     "fmt": {
         "lineWidth": 120,
         "indentWidth": 4,
-        "trailingCommas": "never"
+        "trailingCommas": "never",
+        "exclude": [".tinker/", ".claude/"]
     },
     "lint": {
         "rules": {
             "tags": ["recommended"],
             "include": ["eqeqeq", "no-throw-literal", "no-sync-fn-in-async-fn"]
-        }
+        },
+        "exclude": [".tinker/"]
+    },
+    "test": {
+        "exclude": [".tinker/"]
     }
 }
