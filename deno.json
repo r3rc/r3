@@ -1,0 +1,27 @@
+{
+    "name": "@r3/monorepo",
+    "version": "0.1.0",
+    "exports": {},
+    "workspace": [
+        "./jarvis",
+        "./tinker"
+    ],
+    "compilerOptions": {
+        "noImplicitOverride": true,
+        "noUncheckedIndexedAccess": true,
+        "noUnusedLocals": true,
+        "noUnusedParameters": true,
+        "noImplicitReturns": true
+    },
+    "fmt": {
+        "lineWidth": 120,
+        "indentWidth": 4,
+        "trailingCommas": "never"
+    },
+    "lint": {
+        "rules": {
+            "tags": ["recommended"],
+            "include": ["eqeqeq", "no-throw-literal", "no-sync-fn-in-async-fn"]
+        }
+    }
+}
