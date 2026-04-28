@@ -1,0 +1,6 @@
+{
+    "name": "@r3/jarvis",
+    "version": "0.1.0",
+    "exports": "./src/mod.ts",
+    "imports": {}
+}
