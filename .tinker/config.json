@@ -1,0 +1,6 @@
+{
+    "sources": {
+        "deno-std": "https://github.com/denoland/std",
+        "linux": "https://github.com/torvalds/linux"
+    }
+}
