@@ -27,7 +27,9 @@
             "Bash(deno lint*)",
             "Bash(deno check*)",
             "Bash(deno test*)",
-            "Bash(deno task*)"
+            "Bash(deno task*)",
+            "Skill(preflight)",
+            "Skill(learn)"
         ]
     },
     "enabledPlugins": {
