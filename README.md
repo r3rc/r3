@@ -37,10 +37,6 @@ deno task tinker --help
 | Type check | `deno check **/*.ts`    | blocker |
 | Tests      | `deno test --allow-all` | blocker |
 
-## Author
-
-Renzo A. Rosas — [github.com/r3rc](https://github.com/r3rc) · [r3rc.dev](https://r3rc.dev)
-
 ## License
 
-MIT
+MIT — see [LICENSE](./LICENSE).
