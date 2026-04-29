@@ -31,7 +31,9 @@ The `learn` skill consults these clones at `.tinker/sources/` before implementin
 
 | Source     | Path                        | Domain                                                                                                                                                     |
 | ---------- | --------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `deno-std` | `.tinker/sources/deno-std/` | Deno standard library. Idiomatic TypeScript APIs, streams, async, FS, encoding, CLI, testing.                                                              |
+| `citty`    | `.tinker/sources/citty/`    | Minimal CLI framework. CLI command parsing, subcommand structure, option handling, interactive prompts, colorized output.                                  |
+| `deno-std` | `.tinker/sources/deno-std/` | Deno standard library. Idiomatic TypeScript APIs, streams, async, FS, encoding, CLI patterns, testing.                                                     |
+| `denokv`   | `.tinker/sources/denokv/`   | Deno KV store. Persistent key-value storage design, encryption patterns, ACID semantics, concurrent access patterns.                                       |
 | `linux`    | `.tinker/sources/linux/`    | Linux kernel. System design, lifecycle, IPC, error handling, data structures at scale, protocol design. Used as design inspiration, not as code reference. |
 
 ## Tooling
@@ -73,5 +75,21 @@ All other `deno-skills` guidance applies as written.
 
 ## Running locally
 
-> _Will be filled in once jarvis and tinker have runnable entry points. Until then, see individual package `deno.json`
-> files for what's wired up._
+### tinker
+
+```sh
+# View available commands
+deno task tinker --help
+
+# Examples:
+deno task tinker sources list
+deno task tinker secrets set API_KEY my-secret
+deno task tinker profiles create work
+deno task tinker ssh gen-key work
+```
+
+See [`tinker/README.md`](./tinker/README.md) for detailed usage.
+
+### jarvis
+
+_In design. Not yet runnable._
