@@ -4,10 +4,9 @@ Workspace toolkit CLI. Manages reference source repositories, encrypted secrets,
 
 ## Why
 
-I wanted one tool that handles four things I do constantly: pin source code I want to read offline, encrypt secrets
-locally without paying SaaS, switch between work/freelance/personal contexts (env + git config + SSH key), and never
-leak credentials into shell history. Existing tools each do one of these well; tinker does all four with a consistent
-interface.
+tinker handles four common workflows in one tool: pinning source code for offline reading, encrypting secrets locally
+without SaaS, switching between work/freelance/personal contexts (env + git config + SSH key), and keeping credentials
+out of shell history. Existing tools each cover one of these well; tinker covers all four with a consistent interface.
 
 ```sh
 deno task tinker --help
