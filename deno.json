@@ -7,6 +7,9 @@
         "./jarvis",
         "./tinker"
     ],
+    "tasks": {
+        "tinker": "deno run --allow-all tinker/cli/main.ts"
+    },
     "compilerOptions": {
         "noImplicitOverride": true,
         "noUncheckedIndexedAccess": true,
@@ -15,10 +18,10 @@
         "noImplicitReturns": true
     },
     "fmt": {
+        "exclude": [".tinker/", ".claude/"],
         "lineWidth": 120,
         "indentWidth": 4,
-        "trailingCommas": "never",
-        "exclude": [".tinker/", ".claude/"]
+        "trailingCommas": "never"
     },
     "lint": {
         "rules": {
