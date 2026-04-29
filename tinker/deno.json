@@ -1,6 +1,10 @@
 {
     "name": "@r3/tinker",
     "version": "0.1.0",
+    "license": "MIT",
+    "author": "Renzo A. Rosas <renzo.r3rc@gmail.com> (https://r3rc.dev)",
+    "homepage": "https://r3rc.dev",
+    "repository": "https://github.com/r3rc/r3",
     "exports": "./src/mod.ts",
     "imports": {
         "src/": "./src/",
