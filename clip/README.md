@@ -5,8 +5,9 @@ Minimal CLI framework for Deno. Type-safe commands, subcommands, and arguments w
 
 ## Why
 
-Cliffy is feature-rich but heavy. Commander assumes Node. I wanted something Deno-native, dependency-light, and fully
-type-inferred — where `args.name` is `string` and `args.loud` is `boolean | undefined` without manual generics.
+Cliffy is feature-rich but heavy. Commander assumes Node. clip is the lightweight middle ground: Deno-native,
+dependency-light, and fully type-inferred — `args.name` resolves to `string` and `args.loud` to `boolean | undefined`
+without manual generics.
 
 ## Usage
 
