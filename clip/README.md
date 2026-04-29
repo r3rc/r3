@@ -3,6 +3,11 @@
 Minimal CLI framework for Deno. Type-safe commands, subcommands, and arguments with zero runtime dependencies beyond
 `@std`.
 
+## Why
+
+Cliffy is feature-rich but heavy. Commander assumes Node. I wanted something Deno-native, dependency-light, and fully
+type-inferred — where `args.name` is `string` and `args.loud` is `boolean | undefined` without manual generics.
+
 ## Usage
 
 ```ts
