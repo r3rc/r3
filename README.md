@@ -2,6 +2,11 @@
 
 Personal AI partner and workspace toolkit. Deno monorepo.
 
+> Built around a simple thesis: my workstation should be programmable, my secrets should be local, and my AI partner
+> should know my code without me re-explaining it every session.
+
+**Status**: Active development. `@r3/clip` and `@r3/tinker` are usable. `@r3/jarvis` is in design.
+
 ## Packages
 
 | Package                  | Description                                                                              |
@@ -31,3 +36,11 @@ deno task tinker --help
 | Lint       | `deno lint`             | blocker |
 | Type check | `deno check **/*.ts`    | blocker |
 | Tests      | `deno test --allow-all` | blocker |
+
+## Author
+
+Renzo A. Rosas — [github.com/r3rc](https://github.com/r3rc) · [r3rc.dev](https://r3rc.dev)
+
+## License
+
+MIT
