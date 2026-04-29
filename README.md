@@ -2,8 +2,8 @@
 
 Personal AI partner and workspace toolkit. Deno monorepo.
 
-> Built around a simple thesis: my workstation should be programmable, my secrets should be local, and my AI partner
-> should know my code without me re-explaining it every session.
+> Built around a simple thesis: a workstation should be programmable, secrets should stay local, and an AI partner
+> should know the codebase without re-explanation every session.
 
 **Status**: Active development. `@r3/clip` and `@r3/tinker` are usable. `@r3/jarvis` is in design.
 
