@@ -104,11 +104,7 @@ function parseArgs(rawArgs: string[]): Args {
 
     const [packageRef, version] = positional;
 
-    if (!packageRef || !version) {
-        throw new Error(usage);
-    }
-
-    return { packageRef, version, dryRun, skipChangelog };
+    return { packageRef: packageRef!, version: version!, dryRun, skipChangelog };
 }
 
 async function release(args: Args) {
@@ -234,31 +230,19 @@ async function ensurePackage(packageJsonPath: string) {
 }
 
 async function hasStagedChanges() {
-    const command = new Deno.Command("git", { args: ["diff", "--cached", "--quiet"] });
-    const { code } = await command.output();
+    const { code } = await $`git diff --cached --quiet`.noThrow();
 
-    if (code === 0) {
-        return false;
-    }
-
-    if (code === 1) {
-        return true;
-    }
+    if (code === 0) return false;
+    if (code === 1) return true;
 
     throw new Error(`failed to inspect staged changes: git diff exited with ${code}`);
 }
 
 async function ensureTagDoesNotExist(tag: string) {
-    const command = new Deno.Command("git", { args: ["rev-parse", "--verify", "--quiet", `refs/tags/${tag}`] });
-    const { code } = await command.output();
+    const { code } = await $`git rev-parse --verify --quiet ${"refs/tags/" + tag}`.noThrow();
 
-    if (code === 1) {
-        return;
-    }
-
-    if (code === 0) {
-        throw new Error(`tag already exists: ${tag}`);
-    }
+    if (code === 1) return;
+    if (code === 0) throw new Error(`tag already exists: ${tag}`);
 
     throw new Error(`failed to inspect tag ${tag}: git rev-parse exited with ${code}`);
 }
@@ -286,14 +270,10 @@ async function readPackageJson(packageJsonPath: string) {
 async function runGitCliff(args: { packageDir: string; tag: string; tagPattern: string; output?: string }) {
     const includePath = `${args.packageDir}/**`;
     const configPath = await writeTempCliffConfig();
+    const outputArgs = args.output ? ["--output", args.output] : [];
 
     try {
-        if (args.output) {
-            await $`git-cliff --config ${configPath} --tag ${args.tag} --tag-pattern ${args.tagPattern} --include-path ${includePath} --output ${args.output}`;
-            return;
-        }
-
-        await $`git-cliff --config ${configPath} --tag ${args.tag} --tag-pattern ${args.tagPattern} --include-path ${includePath}`;
+        await $`git-cliff --config ${configPath} --tag ${args.tag} --tag-pattern ${args.tagPattern} --include-path ${includePath} ${outputArgs}`;
     } finally {
         await Deno.remove(configPath).catch(() => {});
     }
