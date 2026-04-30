@@ -5,7 +5,10 @@
     "author": "Renzo A. Rosas <renzo.r3rc@gmail.com> (https://r3rc.dev)",
     "homepage": "https://r3rc.dev",
     "repository": "https://github.com/r3rc/r3",
-    "exports": "./src/mod.ts",
+    "exports": {
+        ".": "./src/mod.ts",
+        "./cli": "./cli/main.ts"
+    },
     "imports": {
         "src/": "./src/",
         "@std/assert": "jsr:@std/assert@^1.0.19",

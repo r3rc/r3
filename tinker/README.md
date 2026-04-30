@@ -2,6 +2,14 @@
 
 Workspace toolkit CLI. Manages reference source repositories, encrypted secrets, environment profiles, and SSH keys.
 
+## Install
+
+```sh
+deno install --global -A -n tinker jsr:@r3rc/tinker/cli
+```
+
+After install, run `tinker --help` from anywhere.
+
 ## Why
 
 tinker handles four common workflows in one tool: pinning source code for offline reading, encrypting secrets locally
@@ -9,7 +17,7 @@ without SaaS, switching between work/freelance/personal contexts (env + git conf
 out of shell history. Existing tools each cover one of these well; tinker covers all four with a consistent interface.
 
 ```sh
-deno task tinker --help
+tinker --help
 ```
 
 ## Sources
