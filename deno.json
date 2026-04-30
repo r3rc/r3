@@ -1,18 +1,12 @@
 {
-    "name": "@r3rc/monorepo",
-    "version": "0.1.0",
-    "license": "MIT",
-    "author": "Renzo A. Rosas <renzo.r3rc@gmail.com> (https://r3rc.dev)",
-    "homepage": "https://r3rc.dev",
-    "repository": "https://github.com/r3rc/r3",
-    "exports": {},
     "workspace": [
         "./clip",
         "./jarvis",
         "./tinker"
     ],
     "tasks": {
-        "tinker": "deno run --allow-all tinker/cli/main.ts"
+        "tinker": "deno run --allow-all tinker/cli/main.ts",
+        "release": "deno run --allow-all .claude/scripts/release.ts"
     },
     "compilerOptions": {
         "noImplicitOverride": true,
