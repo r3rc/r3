@@ -1,11 +1,10 @@
 import { dirname, join } from "@std/path";
 import * as v from "@valibot/valibot";
 
+export type TinkerConfig = v.InferOutput<typeof TinkerConfigSchema>;
 const TinkerConfigSchema = v.object({
     sources: v.optional(v.record(v.string(), v.string()), {})
 });
-
-export type TinkerConfig = v.InferOutput<typeof TinkerConfigSchema>;
 
 const CONFIG_FILENAME = "config.json";
 const TINKER_DIR = ".tinker";

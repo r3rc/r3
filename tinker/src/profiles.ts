@@ -5,14 +5,13 @@ import { ensureDir, profilesDir } from "./config.ts";
 import { warn } from "./log.ts";
 import { activateAgent } from "./ssh.ts";
 
+export type Profile = v.InferOutput<typeof ProfileSchema>;
 const ProfileSchema = v.object({
     name: v.string(),
     env: v.optional(v.record(v.string(), v.string()), {}),
     git: v.optional(v.record(v.string(), v.string()), {}),
     ssh: v.optional(v.object({ identityFile: v.optional(v.string()) }))
 });
-
-export type Profile = v.InferOutput<typeof ProfileSchema>;
 
 const SECRET_PREFIX = "$secret:";
 const VALID_NAME_RE = /^[a-zA-Z][a-zA-Z0-9_-]*$/;
