@@ -1,12 +1,15 @@
 #!/usr/bin/env -S deno run --allow-all
 
 import $ from "jsr:@david/dax@^0.43.2";
+import { defineCommand, runMain } from "jsr:@r3rc/clip@^0.1.0";
+import { bold, cyan, dim, green } from "jsr:@std/fmt@^1.0.0/colors";
 
 type Args = {
     packageRef: string;
     version: string;
     dryRun: boolean;
     skipChangelog: boolean;
+    allowSlowTypes: boolean;
 };
 
 type Package = {
@@ -14,8 +17,6 @@ type Package = {
     name: string;
 };
 
-const usage =
-    "usage: deno run --allow-all .claude/scripts/release.ts [--dry-run|-n] [--skip-changelog] <package> <version>";
 const cliffConfig = String.raw`
 [changelog]
 header = """
@@ -70,41 +71,23 @@ sort_commits = "oldest"
 `;
 
 if (import.meta.main) {
-    const args = parseArgs(Deno.args);
-    await release(args);
-}
-
-function parseArgs(rawArgs: string[]): Args {
-    let dryRun = false;
-    let skipChangelog = false;
-    const positional: string[] = [];
-
-    for (const arg of rawArgs) {
-        if (arg === "--dry-run" || arg === "-n") {
-            dryRun = true;
-            continue;
-        }
-
-        if (arg === "--skip-changelog") {
-            skipChangelog = true;
-            continue;
-        }
-
-        if (arg === "--help" || arg === "-h") {
-            console.log(usage);
-            Deno.exit(0);
-        }
-
-        positional.push(arg);
-    }
-
-    if (positional.length !== 2) {
-        throw new Error(usage);
-    }
-
-    const [packageRef, version] = positional;
-
-    return { packageRef: packageRef!, version: version!, dryRun, skipChangelog };
+    await runMain(defineCommand({
+        meta: { name: "release", description: "Release a workspace package to JSR" },
+        args: {
+            "dry-run": { type: "boolean", alias: "n", description: "Preview without making changes" },
+            "skip-changelog": { type: "boolean", description: "Skip changelog generation" },
+            "allow-slow-types": { type: "boolean", description: "Pass --allow-slow-types to deno publish" },
+            package: { type: "positional", description: "Package name or directory", required: true },
+            version: { type: "positional", description: "Version to release", required: true }
+        },
+        run: ({ args }) => release({
+            packageRef: args.package,
+            version: args.version,
+            dryRun: args["dry-run"] ?? false,
+            skipChangelog: args["skip-changelog"] ?? false,
+            allowSlowTypes: args["allow-slow-types"] ?? false
+        })
+    }));
 }
 
 async function release(args: Args) {
@@ -120,8 +103,8 @@ async function release(args: Args) {
     if (args.dryRun) {
         $.logStep("dry-run", `release ${tag}`);
         await printVersionChange(packageJsonPath, packageVersion);
-        await runPublishDryRun({ packageDir, version: packageVersion });
-        printPublishInstructions(packageDir);
+        await runPublishDryRun({ packageDir, version: packageVersion, allowSlowTypes: args.allowSlowTypes });
+        printPublishInstructions(packageDir, args.allowSlowTypes);
         return;
     }
 
@@ -151,7 +134,7 @@ async function release(args: Args) {
     await ensureTagDoesNotExist(tag);
     await $`git tag -a ${tag} -m ${`release ${tag}`}`;
 
-    printPublishInstructions(packageDir);
+    printPublishInstructions(packageDir, args.allowSlowTypes);
 }
 
 function normalizePackageVersion(version: string) {
@@ -251,7 +234,7 @@ async function printVersionChange(packageJsonPath: string, version: string) {
     const cfg = await readPackageJson(packageJsonPath);
     const previous = cfg.version;
 
-    console.log(`${packageJsonPath}: ${previous ?? "(no version)"} -> ${version}`);
+    console.log(`${packageJsonPath}: ${dim(String(previous ?? "(no version)"))} -> ${green(version)}`);
 }
 
 async function writePackageVersion(packageJsonPath: string, version: string) {
@@ -279,9 +262,10 @@ async function runGitCliff(args: { packageDir: string; tag: string; tagPattern: 
     }
 }
 
-async function runPublishDryRun(args: { packageDir: string; version: string }) {
+async function runPublishDryRun(args: { packageDir: string; version: string; allowSlowTypes: boolean }) {
     $.logStep("publish", "dry-run");
-    await $`deno publish --dry-run --allow-dirty --set-version ${args.version}`.cwd(args.packageDir);
+    const slowTypesArgs = args.allowSlowTypes ? ["--allow-slow-types"] : [];
+    await $`deno publish --dry-run --allow-dirty --set-version ${args.version} ${slowTypesArgs}`.cwd(args.packageDir);
 }
 
 async function writeTempCliffConfig() {
@@ -291,9 +275,10 @@ async function writeTempCliffConfig() {
     return path;
 }
 
-function printPublishInstructions(packageDir: string) {
+function printPublishInstructions(packageDir: string, allowSlowTypes: boolean) {
+    const publishCmd = allowSlowTypes ? "deno publish --allow-slow-types" : "deno publish";
     console.log("");
-    console.log("To publish:");
-    console.log("  git push && git push --tags");
-    console.log(`  cd ${packageDir} && deno publish`);
+    console.log(bold("To publish:"));
+    console.log(`  ${cyan("git push && git push --tags")}`);
+    console.log(`  ${cyan(`cd ${packageDir} && ${publishCmd}`)}`);
 }
