@@ -4,7 +4,10 @@ import { formatLineColumns, resolveValue, toArray } from "./_utils.ts";
 import { resolveArgs } from "./args.ts";
 import type { Arg, ArgsDef, CommandDef } from "./types.ts";
 
-export async function showUsage<T extends ArgsDef = ArgsDef>(cmd: CommandDef<T>, parent?: CommandDef<T>) {
+export async function showUsage<T extends ArgsDef = ArgsDef>(
+    cmd: CommandDef<T>,
+    parent?: CommandDef<T>
+): Promise<void> {
     try {
         console.log((await renderUsage(cmd, parent)) + "\n");
     } catch (error) {
@@ -14,7 +17,10 @@ export async function showUsage<T extends ArgsDef = ArgsDef>(cmd: CommandDef<T>,
 
 const negativePrefixRe = /^no[-A-Z]/;
 
-export async function renderUsage<T extends ArgsDef = ArgsDef>(cmd: CommandDef<T>, parent?: CommandDef<T>) {
+export async function renderUsage<T extends ArgsDef = ArgsDef>(
+    cmd: CommandDef<T>,
+    parent?: CommandDef<T>
+): Promise<string> {
     const cmdMeta = await resolveValue(cmd.meta ?? {});
     const cmdArgs = resolveArgs(await resolveValue(cmd.args ?? ({} as T)));
     const parentMeta = await resolveValue(parent?.meta ?? {});
