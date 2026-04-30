@@ -1,4 +1,4 @@
-# @r3/tinker
+# @r3rc/tinker
 
 Workspace toolkit CLI. Manages reference source repositories, encrypted secrets, environment profiles, and SSH keys.
 

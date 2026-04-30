@@ -1,4 +1,4 @@
-# @r3/clip
+# @r3rc/clip
 
 Minimal CLI framework for Deno. Type-safe commands, subcommands, and arguments with zero runtime dependencies beyond
 `@std`.
@@ -12,7 +12,7 @@ without manual generics.
 ## Usage
 
 ```ts
-import { defineCommand, runMain } from "@r3/clip";
+import { defineCommand, runMain } from "@r3rc/clip";
 
 const rootCmd = defineCommand({
     meta: { name: "greet", version: "1.0.0", description: "A greeting CLI" },

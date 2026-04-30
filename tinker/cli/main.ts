@@ -1,4 +1,4 @@
-import { defineCommand, runMain } from "@r3/clip";
+import { defineCommand, runMain } from "@r3rc/clip";
 import { profilesCmd } from "./commands/profiles.ts";
 import { secretsCmd } from "./commands/secrets.ts";
 import { sourcesCmd } from "./commands/sources.ts";

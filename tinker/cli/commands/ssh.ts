@@ -1,4 +1,4 @@
-import { type ArgsDef, type CommandDef, defineCommand } from "@r3/clip";
+import { type ArgsDef, type CommandDef, defineCommand } from "@r3rc/clip";
 import { join } from "@std/path";
 import { sshDir } from "src/config.ts";
 import { bold, cyan, dim, gray } from "src/log.ts";

@@ -1,4 +1,4 @@
-import { type ArgsDef, type CommandDef, defineCommand } from "@r3/clip";
+import { type ArgsDef, type CommandDef, defineCommand } from "@r3rc/clip";
 import { bold, cyan, dim, gray, promptPin } from "src/log.ts";
 import {
     applyProfile,
