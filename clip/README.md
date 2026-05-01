@@ -1,13 +1,18 @@
 # @r3rc/clip
 
-Minimal CLI framework for Deno. Type-safe commands, subcommands, and arguments with zero runtime dependencies beyond
-`@std`.
+> **Deprecated.** Use [`citty`](https://github.com/unjs/citty) directly — it
+> works cleanly in Deno via `npm:citty` with no local `node_modules`. clip was a
+> Deno-native reimplementation; the gap it filled no longer exists.
+
+Minimal CLI framework for Deno. Type-safe commands, subcommands, and arguments
+with zero runtime dependencies beyond `@std`.
 
 ## Why
 
-Cliffy is feature-rich but heavy. Commander assumes Node. clip is the lightweight middle ground: Deno-native,
-dependency-light, and fully type-inferred — `args.name` resolves to `string` and `args.loud` to `boolean | undefined`
-without manual generics.
+Cliffy is feature-rich but heavy. Commander assumes Node. clip is the
+lightweight middle ground: Deno-native, dependency-light, and fully
+type-inferred — `args.name` resolves to `string` and `args.loud` to
+`boolean | undefined` without manual generics.
 
 ## Usage
 
@@ -17,13 +22,17 @@ import { defineCommand, runMain } from "@r3rc/clip";
 const rootCmd = defineCommand({
     meta: { name: "greet", version: "1.0.0", description: "A greeting CLI" },
     args: {
-        name: { type: "positional", description: "Name to greet", required: true },
-        loud: { type: "boolean", description: "Shout it", alias: "l" }
+        name: {
+            type: "positional",
+            description: "Name to greet",
+            required: true,
+        },
+        loud: { type: "boolean", description: "Shout it", alias: "l" },
     },
     run({ args }) {
         const msg = `Hello, ${args.name}!`;
         console.log(args.loud ? msg.toUpperCase() : msg);
-    }
+    },
 });
 
 await runMain(rootCmd);
@@ -38,7 +47,8 @@ await runMain(rootCmd);
 | `boolean`    | `{ type: "boolean", alias: "v" }`                |
 | `enum`       | `{ type: "enum", options: ["a", "b", "c"] }`     |
 
-Parsed args are fully typed — `args.name` is `string`, `args.loud` is `boolean | undefined`, etc.
+Parsed args are fully typed — `args.name` is `string`, `args.loud` is
+`boolean | undefined`, etc.
 
 ## Subcommands
 
@@ -47,22 +57,24 @@ const rootCmd = defineCommand({
     meta: { name: "mycli" },
     subCommands: {
         build: buildCmd,
-        deploy: deployCmd
-    }
+        deploy: deployCmd,
+    },
 });
 ```
 
-Subcommand names can have aliases: `alias: ["rm"]` on the meta makes `remove` also respond to `rm`.
+Subcommand names can have aliases: `alias: ["rm"]` on the meta makes `remove`
+also respond to `rm`.
 
 ## Lifecycle
 
-Each command supports optional `setup` and `cleanup` hooks. `cleanup` always runs, even when `run` throws.
+Each command supports optional `setup` and `cleanup` hooks. `cleanup` always
+runs, even when `run` throws.
 
 ```ts
 defineCommand({
     async setup(ctx) {/* runs before run */},
     async run(ctx) {/* main logic */},
-    async cleanup(ctx) {/* always runs after */}
+    async cleanup(ctx) {/* always runs after */},
 });
 ```
 
