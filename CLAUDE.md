@@ -31,7 +31,6 @@ The `learn` skill consults these clones at `.tinker/sources/` before implementin
 
 | Source     | Path                        | Domain                                                                                                                                                     |
 | ---------- | --------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `citty`    | `.tinker/sources/citty/`    | Minimal CLI framework. CLI command parsing, subcommand structure, option handling, interactive prompts, colorized output.                                  |
 | `deno-std` | `.tinker/sources/deno-std/` | Deno standard library. Idiomatic TypeScript APIs, streams, async, FS, encoding, CLI patterns, testing.                                                     |
 | `denokv`   | `.tinker/sources/denokv/`   | Deno KV store. Persistent key-value storage design, encryption patterns, ACID semantics, concurrent access patterns.                                       |
 | `linux`    | `.tinker/sources/linux/`    | Linux kernel. System design, lifecycle, IPC, error handling, data structures at scale, protocol design. Used as design inspiration, not as code reference. |
