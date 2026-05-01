@@ -1,4 +1,4 @@
-import { type ArgsDef, type CommandDef, defineCommand } from "@r3rc/clip";
+import { type ArgsDef, type CommandDef, defineCommand } from "@unjs/citty";
 import { findProjectRoot } from "src/config.ts";
 import { bold, cyan, dim, done, fail, gray, green, pending, red } from "src/log.ts";
 import { addSource, listSources, nameFromUrl, removeSource, syncSource } from "src/sources.ts";

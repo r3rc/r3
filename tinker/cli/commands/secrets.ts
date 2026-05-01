@@ -1,4 +1,4 @@
-import { type ArgsDef, type CommandDef, defineCommand } from "@r3rc/clip";
+import { type ArgsDef, type CommandDef, defineCommand } from "@unjs/citty";
 import { bold, cyan, dim, fatal, promptPin } from "src/log.ts";
 import { deriveKey, getSecret, listSecretKeys, loadOrCreateSalt, removeSecret, setSecret } from "src/secrets.ts";
 

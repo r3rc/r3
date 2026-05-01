@@ -1,5 +1,5 @@
-import { type ArgsDef, type CommandDef, defineCommand } from "@r3rc/clip";
 import { join } from "@std/path";
+import { type ArgsDef, type CommandDef, defineCommand } from "@unjs/citty";
 import { sshDir } from "src/config.ts";
 import { bold, cyan, dim, gray } from "src/log.ts";
 import { readProfile, removeSshKey, setSshKey } from "src/profiles.ts";

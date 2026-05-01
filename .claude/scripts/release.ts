@@ -1,8 +1,8 @@
 #!/usr/bin/env -S deno run --allow-all
 
 import $ from "jsr:@david/dax@^0.43.2";
-import { defineCommand, runMain } from "jsr:@r3rc/clip@^0.1.0";
 import { bold, cyan, dim, green } from "jsr:@std/fmt@^1.0.0/colors";
+import { defineCommand, runMain } from "npm:citty@0.2.2";
 
 type Args = {
     packageRef: string;
